@@ -26,7 +26,7 @@ speed = 0.25 # time averaging and phase change speed
 phase = 0    # animations depend on sin, analogous to a time
 volts = 0    # normalized voltage level for different input modes
 i = 0        # color index (0-255)
-
+voltIn = 0   # initialize variable
 
 def getVoltage(pin):
     return (pin.value * 3.3) / 65536
@@ -63,7 +63,8 @@ while True:
     dot.show()
 
     # linear potentiometer to LED strip
-    voltIn = getVoltage(ain)
+    voltIn = (1-speed)*voltIn + speed*getVoltage(ain)
+    #print(voltIn)
 
     # set base color of all pixels
     rainbow_cycle(i)
@@ -72,7 +73,7 @@ while True:
     if voltIn > 1.6:
 
         # normalized voltage between 0-1, time averaged (smoothed)
-        volts = ((1-speed)*volts + speed*(voltIn-1.6)/1.6)
+        volts = (voltIn-1.6)/1.6
         volts = clamp(volts,0,1)
 
         # create center point
@@ -89,9 +90,9 @@ while True:
                 else:
                     pixels[j] = (0,0,0)
     # wavy mode
-    else:
+    elif voltIn > 0.55:
         # scale between ~0-1
-        volts = ((1-speed)*volts + speed*(voltIn-0.5))
+        volts = voltIn-0.5
 
         # propagate waves
         for j in range(num_pixels):
@@ -102,10 +103,12 @@ while True:
                 pass
             else:
                 pixels[j] = (0,0,0)
+    else:
+        # full rainbow_cycle
+        pass
 
     pixels.show()
     phase += speed
     phase = phase % 6.28
     i = (i+5) % 256
-
 
