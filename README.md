@@ -9,8 +9,9 @@ Supplies:
 
 
 ## Light Modes
+`main.py` comes with a few preprogrammed light modes that read voltages from the analog pin connected to potentiometer. For < 0.55 V, the full strip will light up with a rainbow cycle  
 
-When the voltage reads between ~0.5-1.6 V, the user will be able to control the position of a pulsing light blob
+When the voltage reads between ~0.55-1.6 V, the user will be able to control the position of a pulsing light blob
 ```python
 # create center point
 pi = int(num_pixels*volts)
