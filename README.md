@@ -26,7 +26,7 @@ for j in range(num_pixels):
 
 ![](user_animation.gif)
 
-When the voltage reads between 1.6-3.2 V, square waves of different frequencies block pixels out 
+When the voltage reads between 1.6-3.2 V square waves of different frequencies block pixels out and propagate
 ```python
 for j in range(num_pixels):
     y = sin( 6.28*j/(num_pixels*volts) - phase )
@@ -34,3 +34,5 @@ for j in range(num_pixels):
         pixels[j] = (0,0,0)
 ```
 ![](led_animation.gif)
+
+At high frequencies you get some cool aliasing effects that make the light strip look random
