@@ -12,8 +12,16 @@ Supplies:
 
 When the voltage reads between ~0.5-1.6 V, the user will be able to control the position of a pulsing light blob
 ```python
-from analogio import AnalogIn
-ain = AnalogIn(board.A2) # potentiometer
+# create center point
+pi = int(num_pixels*volts)
+
+for j in range(num_pixels):
+    if (j > pi-3) and (j < pi+3):
+        pass
+    else:
+        y = sin( 6.28*abs(pi-j)/num_pixels - phase )
+        if abs(y) > 0.2:
+            pixels[j] = (0,0,0)
 ```
 
 ![](user_animation.gif)
