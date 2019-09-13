@@ -1,4 +1,6 @@
-# Controllable-LED-Strip
+# Animated-LED-Strip
+![](sin_wave.gif)
+
 A Gemma M0 controls a 30 pixel LED strip with custom animations mapped to the analog input from a potentiometer
 
 Supplies:
@@ -24,7 +26,7 @@ for j in range(num_pixels):
         if abs(y) > 0.2:
             pixels[j] = (0,0,0)
 ```
-
+![](light_pulse.gif)
 ![](user_animation.gif)
 
 When the voltage reads between 1.6-3.2 V square waves of different frequencies block pixels out and propagate
